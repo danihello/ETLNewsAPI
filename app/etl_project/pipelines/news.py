@@ -69,7 +69,7 @@ def pipeline(config: dict, pipeline_logging: PipelineLogging):
         postgresql_client=postgresql_client,
         table=table,
         metadata=metadata,
-        load_method="overwrite",
+        load_method="upsert",
     )
     pipeline_logging.logger.info("Pipeline run successful")
 
