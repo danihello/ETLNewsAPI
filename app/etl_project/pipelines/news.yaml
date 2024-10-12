@@ -1,0 +1,4 @@
+name: news_etl
+config:
+  category_reference_path: "./etl_project/data/categories/categories.csv"
+  log_folder_path: "./etl_project/logs"
