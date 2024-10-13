@@ -12,11 +12,26 @@ from etl_project.assets.metadata_logging import MetaDataLogging, MetaDataLogging
 from etl_project.assets.pipeline_logging import PipelineLogging
 import yaml
 from pathlib import Path
-import schedule
-import time
 
 
 def pipeline(config: dict, pipeline_logging: PipelineLogging):
+    """
+    Runs the pipeline for extracting, transforming, and loading news data from the News API and CSV files into a PostgreSQL database.
+    
+    This function performs the following steps:
+    1. Logs the start of the pipeline run.
+    2. Retrieves the necessary environment variables for the News API and PostgreSQL connection.
+    3. Creates a NewsApiClient instance using the API key.
+    4. Extracts news data from the News API and CSV files.
+    5. Transforms the extracted data.
+    6. Connects to the PostgreSQL database and creates a table for the news data.
+    7. Loads the transformed data into the PostgreSQL table using an upsert operation.
+    8. Logs the successful completion of the pipeline run.
+    
+    The function takes the following parameters:
+    - `config`: A dictionary containing the pipeline configuration, including the log folder path.
+    - `pipeline_logging`: A PipelineLogging instance for logging the pipeline run.
+    """
     pipeline_logging.logger.info("Starting pipeline run")
     # set up environment variables
     pipeline_logging.logger.info("Getting pipeline environment variables")
@@ -78,6 +93,13 @@ def run_pipeline(
     postgresql_logging_client: PostgreSqlClient,
     pipeline_config: dict,
 ):
+    """
+    Runs the pipeline and logs the start, success, or failure of the pipeline run.
+    
+    This function sets up the pipeline logging and metadata logging, runs the pipeline,
+    and logs the status of the pipeline run. If the pipeline run is successful, it logs
+    the pipeline logs. If the pipeline run fails, it logs the error.
+    """
     pipeline_logging = PipelineLogging(
         pipeline_name=pipeline_config.get("name"),
         log_folder_path=pipeline_config.get("config").get("log_folder_path"),

@@ -13,6 +13,32 @@ class MetaDataLoggingStatus:
 
 
 class MetaDataLogging:
+    """
+    Initializes a MetaDataLogging object that logs pipeline metadata to a PostgreSQL database.
+    
+    Args:
+        pipeline_name (str): The name of the pipeline.
+        postgresql_client (PostgreSqlClient): A client for interacting with the PostgreSQL database.
+        config (dict, optional): A dictionary of configuration options for the pipeline.
+        log_table_name (str, optional): The name of the table to store the pipeline logs.
+    
+    Attributes:
+        pipeline_name (str): The name of the pipeline.
+        log_table_name (str): The name of the table to store the pipeline logs.
+        postgresql_client (PostgreSqlClient): A client for interacting with the PostgreSQL database.
+        config (dict): A dictionary of configuration options for the pipeline.
+        metadata (MetaData): SQLAlchemy metadata object for the database.
+        table (Table): SQLAlchemy table object for the pipeline logs table.
+        run_id (int): The current run ID for the pipeline.
+    
+    Methods:
+        _create_log_table() -> None:
+            Creates the pipeline logs table if it does not already exist.
+        _get_run_id() -> int:
+            Gets the next run ID for the pipeline, starting at 1 if no previous runs exist.
+        log(status: MetaDataLoggingStatus = MetaDataLoggingStatus.RUN_START, timestamp: datetime = None, logs: str = None) -> None:
+            Writes pipeline metadata log to the database.
+    """
     def __init__(
         self,
         pipeline_name: str,
