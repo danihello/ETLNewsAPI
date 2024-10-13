@@ -3,6 +3,14 @@ import time
 
 
 class PipelineLogging:
+    """
+    Provides a logging utility for ETL pipelines that logs to both a file and the console.
+    
+    The `PipelineLogging` class sets up a logger with the given pipeline name and logs to a file in the specified log folder path.
+    The logs are formatted with the timestamp, logger name, log level, and message.
+    
+    The `get_logs()` method returns the contents of the log file as a string.
+    """
     def __init__(self, pipeline_name: str, log_folder_path: str):
         self.pipeline_name = pipeline_name
         self.log_folder_path = log_folder_path
