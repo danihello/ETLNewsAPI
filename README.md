@@ -137,7 +137,3 @@ To deploy and run the Docker image in a cloud environment, follow these general 
 ## Contributing
 
 Feel free to open an issue or create a pull request if you have suggestions or improvements.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more information.
