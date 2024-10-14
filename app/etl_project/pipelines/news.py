@@ -14,6 +14,7 @@ import yaml
 from pathlib import Path
 
 
+
 def pipeline(config: dict, pipeline_logging: PipelineLogging):
     """
     Runs the pipeline for extracting, transforming, and loading news data from the News API and CSV files into a PostgreSQL database.
@@ -126,7 +127,7 @@ def run_pipeline(
         pipeline_logging.logger.handlers.clear()
 
 if __name__ == "__main__":
-    load_dotenv()
+    load_dotenv(override=True)
     LOGGING_SERVER_NAME = os.environ.get("LOGGING_SERVER_NAME")
     LOGGING_DATABASE_NAME = os.environ.get("LOGGING_DATABASE_NAME")
     LOGGING_USERNAME = os.environ.get("LOGGING_USERNAME")
